@@ -27,7 +27,6 @@ public:
         index1=0;
         index2=s.length()-1;
         while(index1<index2) {
-            if(s[index1])
             temp = s[index1];
             s[index1] = s[index2];
             s[index2] = temp;
