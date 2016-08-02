@@ -45,37 +45,39 @@ private:
     vector<int> helperDP(const string& input) {
         vector<int> num;
         vector<char> op;
-        for(int i=0,s=0;i<input.length();++i){
+        int s = 0;
+        for(int i=0;i<input.length();++i){
             if(isdigit(input[i])) continue;
             
             op.push_back(input[i]);
             num.push_back(stoi(input.substr(s,i-s)));
             s = i+1;
        }
+       num.push_back(stoi(input.substr(s,input.length()-s)));
        
        vector<vector<vector<int>>> table(num.size(),vector<vector<int>>(num.size()));
        for(int begin=0;begin<num.size();++begin) {
-           table[begin][begin] = num[begin];
+           table[begin][begin].push_back(num[begin]);
        }
        
        for(int dist=1;dist<num.size();++dist) {
            for(int begin=0;begin<num.size()-dist;++begin) {
                for(int i=0;i<dist;++i) {
-                    swtich(op[i]) {
+                    switch(op[begin+i]) {
                         case '+':
                             for(auto left : table[begin][begin+i])
                                 for(auto right : table[begin+i+1][begin+dist])
-                                    table[begin][begin+dist].push_back(table[left+right]);
+                                    table[begin][begin+dist].push_back(left+right);
                             break;
                         case '-':
                             for(auto left : table[begin][begin+i])
                                 for(auto right : table[begin+i+1][begin+dist])
-                                    table[begin][begin+dist].push_back(table[left-right]);
+                                    table[begin][begin+dist].push_back(left-right);
                             break;
                         case '*': 
                             for(auto left : table[begin][begin+i])
                                 for(auto right : table[begin+i+1][begin+dist])
-                                    table[begin][begin+dist].push_back(table[left*right]);
+                                    table[begin][begin+dist].push_back(left*right);
                             break;
                         default: break; 
                     }
