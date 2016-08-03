@@ -7,6 +7,26 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+ class Solution {
+public:
+    int countNodes(TreeNode* root) {
+        if(root==NULL)
+            return 0;
+            
+        int leftHeight = 0;
+        int rightHeight = 0;
+        for(TreeNode *p=root->left;p!=NULL;p=p->left)
+            leftHeight++;
+        for(TreeNode *p=root->right;p!=NULL;p=p->right)
+            rightHeight++;
+            
+        if(leftHeight==rightHeight)
+            return (1<<(leftHeight+1))-1;//2^(leftHeight+1)-1
+            
+        return 1+countNodes(root->left)+countNodes(root->right);
+    }
+};
+
 //solution ELT, to-do:further check
 class Solution {
 public:
