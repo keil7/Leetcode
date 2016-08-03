@@ -7,7 +7,7 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
- class Solution {
+class Solution {
 public:
     int countNodes(TreeNode* root) {
         if(root==NULL)
@@ -26,7 +26,41 @@ public:
         return 1+countNodes(root->left)+countNodes(root->right);
     }
 };
+//left height calculate once
+class Solution {
+public:
+    int countNodes(TreeNode* root) {
+        if(NULL==root) return 0;
 
+    	TreeNode *p=root;
+    	int height=0;
+    	// left height only needs to be calculated once
+    	while(NULL!=p){
+    		++height;
+    		p=p->left;
+    	}
+    
+    	return recursiveCountWithHeight(root,height);
+    }
+private:
+    int recursiveCountWithHeight(struct TreeNode* root,int height) {
+	    if(NULL==root) return 0;
+
+	    TreeNode *p=root;
+	    int r_h=0;
+	    while(NULL!=p){
+		    ++r_h;
+		    p=p->right;
+    	}
+    
+    	if(height==r_h){
+    		return (1<<height)-1;
+    	}else{
+    		return 1+recursiveCountWithHeight(root->left,height-1)
+    			+countNodes(root->right);
+    	}
+    }
+};
 //solution ELT, to-do:further check
 class Solution {
 public:
