@@ -1,4 +1,4 @@
-class Solution {
+class Solution1 {
 public:
     int maxProfit(vector<int>& prices) {
         if(prices.empty())
@@ -25,7 +25,7 @@ public:
     }
 };
 
-class Solution {
+class Solution2 {
 public:
     int maxProfit(vector<int>& prices) {
         if(prices.empty())
