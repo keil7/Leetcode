@@ -1,4 +1,4 @@
-class Solution {
+class Solution1 {
 public:
     int maxProfit(vector<int>& prices) {
         if(prices.empty())
@@ -38,4 +38,22 @@ private:
         }
     }
     
+};
+
+class Solution2 {
+public:
+    int maxProfit(vector<int>& prices) {
+        if(prices.empty())
+            return 0;
+        int maxProfit1 = 0, maxProfit2 = 0;
+        int minPrice1 = INT_MAX, minPrice2 = INT_MAX;
+        
+        for(auto curPrice : prices) {
+            maxProfit2 = max(maxProfit2,curPrice-minPrice2);
+            minPrice2 = min(minPrice2,curPrice-maxProfit1);
+            maxProfit1 = max(maxProfit1,curPrice-minPrice1);
+            minPrice1 = min(minPrice1,curPrice);
+        }
+        return maxProfit2;
+    }
 };
