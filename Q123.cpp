@@ -53,6 +53,11 @@ public:
             minPrice2 = min(minPrice2,curPrice-maxProfit1);
             maxProfit1 = max(maxProfit1,curPrice-minPrice1);
             minPrice1 = min(minPrice1,curPrice);
+            /*also works,include the condition of buy and sell in single day
+            minPrice1 = min(minPrice1,curPrice);
+            maxProfit1 = max(maxProfit1,curPrice-minPrice1);
+            minPrice2 = min(minPrice2,curPrice-maxProfit1);
+            maxProfit2 = max(maxProfit2,curPrice-minPrice2);*/
         }
         return maxProfit2;
     }
