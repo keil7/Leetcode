@@ -1,6 +1,9 @@
 class Solution {
 public:
     bool isValid(string s) {
+        if(s.length()&1)
+            return false;
+            
         stack<char> stack1;
         for(auto c : s) {
             if(c=='('||c=='{'||c=='[')
